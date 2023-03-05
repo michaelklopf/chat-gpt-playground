@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -9,15 +10,15 @@ class ChatGptController extends Controller
 {
     public function index()
     {
-        return view('chatgpt.index');
+        return Inertia::render('Chat/Index');
     }
 
     public function ask(Request $request)
     {
         $prompt = $request->input('prompt');
         $response = $this->askToChatGPT($prompt);
-
-        return view('chatgpt.response', ['response' => $response]);
+        return $response->json();
+        // return view('chatgpt.response', ['response' => $response]);
     }
 
     private function askToChatGPT($prompt)
@@ -31,11 +32,11 @@ class ChatGptController extends Controller
                 "max_tokens" => 1000,
                 "temperature" => 0.5
             ]);
-        
+
         if (! $response->successful()) {
             dd($response);
         }
 
-        return $response->json()['choices'][0]['text'];
+        return $response;
     }
 }
