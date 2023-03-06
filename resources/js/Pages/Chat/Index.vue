@@ -37,9 +37,9 @@ const answer = ref('');
 
 const submit = () => {
     axios
-        .post('/chatgpt/ask', form.prompt.value)
+        .post('/chatgpt/ask', form.value)
         .then((response) => {
-            answer.value = response.choices[0].text;
+            answer.value = response.data.choices[0].text;
         })
         .catch((error) => {
             console.log('whoopsy', error);
