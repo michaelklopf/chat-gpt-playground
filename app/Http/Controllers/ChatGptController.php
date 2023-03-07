@@ -10,7 +10,7 @@ class ChatGptController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Chat/Index');
+        return Inertia::render('Ask/Index');
     }
 
     public function ask(Request $request)

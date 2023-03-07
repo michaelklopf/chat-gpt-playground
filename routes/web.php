@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChatGptController;
+use App\Http\Controllers\ChatWithChatGptController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/chatgpt', [ChatGptController::class, 'index'])
-    ->name('chatgpt.index');
+Route::get('/ask', [ChatGptController::class, 'index'])
+    ->name('ask.index');
 Route::post('/chatgpt/ask', [ChatGptController::class, 'ask'])
     ->name('chatgpt.ask');
+
+Route::get('/chat', [ChatWithChatGptController::class, 'index'])
+    ->name('chat.index');
+Route::post('/chatgpt/chat', [ChatWithChatGptController::class, 'chat'])
+    ->name('chatgpt.chat');
