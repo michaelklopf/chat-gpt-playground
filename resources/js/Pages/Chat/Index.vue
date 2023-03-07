@@ -21,6 +21,50 @@
                     </div>
                 </div>
 
+                <fieldset class="sm:col-span-2 mt-8 ml-1">
+                    <legend class="text-sm font-medium text-gray-500">Temperature</legend>
+
+                    <input
+                        id="temp0"
+                        class="peer/temp0"
+                        type="radio"
+                        name="temperature"
+                        v-model="form.temperature"
+                        value="0"
+                        checked
+                    />
+                    <label
+                        for="temp0"
+                        class="ml-1 peer-checked/temp0:text-sky-500"
+                    >0</label>
+
+                    <input
+                        id="temp05"
+                        class="ml-2 peer/temp05"
+                        type="radio"
+                        name="temperature"
+                        v-model="form.temperature"
+                        value="0.5"
+                    />
+                    <label
+                        for="temp05"
+                        class="ml-1 peer-checked/temp05:text-sky-500"
+                    >0.5</label>
+
+                    <input
+                        id="temp1"
+                        class="ml-2 peer/temp1"
+                        type="radio"
+                        name="temperature"
+                        v-model="form.temperature"
+                        value="1"
+                    />
+                    <label
+                        for="temp1"
+                        class="ml-1 peer-checked/temp1:text-sky-500"
+                    >1</label>
+                </fieldset>
+
                 <div class="sm:col-span-2 mt-8 ml-1">
                     <dt class="text-sm font-medium text-gray-500">Answer</dt>
                     <dd
@@ -45,6 +89,7 @@ import { ref } from 'vue';
 
 const form = ref({
     prompt: '',
+    temperature: "0",
 });
 
 const answer = ref('...');

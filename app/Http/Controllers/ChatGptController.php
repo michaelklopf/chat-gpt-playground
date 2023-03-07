@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Inertia\Inertia;
 
 class ChatGptController extends Controller
 {
@@ -15,22 +15,21 @@ class ChatGptController extends Controller
 
     public function ask(Request $request)
     {
-        $prompt = $request->input('prompt');
-        $response = $this->askToChatGPT($prompt);
+        $response = $this->askToChatGPT($request->input('prompt'), $request->input('temperature'));
+
         return $response->json();
-        // return view('chatgpt.response', ['response' => $response]);
     }
 
-    private function askToChatGPT($prompt)
+    private function askToChatGPT($prompt, $temperature = 0.5)
     {
         $response = Http::withoutVerifying()
             ->withHeaders([
-                'Authorization' => 'Bearer ' . env('CHATGPT_API_KEY'),
+                'Authorization' => 'Bearer '.env('CHATGPT_API_KEY'),
                 'Content-Type' => 'application/json',
             ])->post('https://api.openai.com/v1/engines/text-davinci-003/completions', [
-                "prompt" => $prompt,
-                "max_tokens" => 1000,
-                "temperature" => 0.5
+                'prompt' => $prompt,
+                'max_tokens' => 1000,
+                'temperature' => intval($temperature),
             ]);
 
         if (! $response->successful()) {
