@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ChatGptController;
 use App\Http\Controllers\ChatWithChatGptController;
+use App\Http\Controllers\EditWithChatGptController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +25,8 @@ Route::get('/chat', [ChatWithChatGptController::class, 'index'])
     ->name('chat.index');
 Route::post('/chatgpt/chat', [ChatWithChatGptController::class, 'chat'])
     ->name('chatgpt.chat');
+
+Route::get('/edit', [EditWithChatGptController::class, 'index'])
+    ->name('edit.index');
+Route::post('/chatgpt/edit', [EditWithChatGptController::class, 'edit'])
+    ->name('chatgpt.edit');
